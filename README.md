@@ -22,18 +22,54 @@
 * идентификатор структурного подразделения, внешний ключ, integer).
 
 ## Решение
-CREATE TABLE сотрудники (
-    идентификатор serial PRIMARY KEY,
-    ФИО сотрудника varchar(50),
+```
+Сотрудники (
+    id serial primary key,
+    Фамилия varchar(50),
+    Имя varchar(50),
+    Отчество varchar(50),
+    id_должности, внешний ключ, INTEGER (ссылка на таблицу Должность),
+    id_отдела, внешний ключ, INTEGER (ссылка на таблицу Отдел),
+    id_найма, внешний ключ, INTEGER (ссылка на таблицу Найм)
+)
+
+Заработная_плата (
+    id serial primary key,
     Оклад decimal(10,2),
-    Должность varchar(50),
-    Тип подразделения varchar(20),
-    Структурное подразделение varchar(60),
-    Дата найма date,
-    Адрес филиала varchar(255)
+    id_сотрудника, внешний ключ, INTEGER (ссылка на таблицу Сотрудники)
+)
 
+Должность (
+    id serial primary key,
+    Название TEXT UNIQUE NOT NULL
+)
 
+Тип подразделения (
+    id serial primary key,
+    Название подразделения TEXT UNIQUE NOT NULL
+)
 
+Отдел (
+    id serial primary key,
+    Структурное подразделение TEXT UNIQUE NOT NULL,
+    id_типа_подразделения, внешний ключ, INTEGER (ссылка на таблицу Тип подразделения)
+)
+
+Найм (
+    id serial primary key,
+    Дата найма date
+)
+
+Филиал (
+    id serial primary key,
+    Область varchar(100),
+    Город varchar(100),
+    Улица varchar(100),
+    Дом varchar(100),
+    id_сотрудника, внешний ключ, INTEGER (ссылка на таблицу Сотрудники) 
+)
+
+```
 
 
 
